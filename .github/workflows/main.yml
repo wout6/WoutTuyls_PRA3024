@@ -1,0 +1,57 @@
+name: Run Python Script with LaTeX
+
+ 
+
+on:
+
+  push: 
+
+    branches:
+
+      - main  # Change this if your branch is different
+
+  pull_request:
+
+ 
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest  # GitHub's runner OS
+
+ 
+
+    steps:
+
+      - name: Checkout repository
+
+        uses: actions/checkout@v3  # Gets your repo files
+
+ 
+
+      - name: Set up Python
+
+        uses: actions/setup-python@v4
+
+        with:
+
+          python-version: '3.10'  # Adjust to match your version
+
+ 
+
+      - name: Install LaTeX
+
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra dvipng
+
+ 
+
+      - name: Install dependencies
+
+        run: pip install -r requirements.txt  # Ensure matplotlib and dependencies are installed
+
+ 
+
+      - name: Run script
+
+        run: python your_script.py  # Replace with the actual script name
